@@ -16,21 +16,28 @@ yargs(hideBin(process.argv))
      {},
     initRepo
 )
-.command("add <file>","Adds the file to repository",(yargs)=>{yargs.positional("file" ,{
+.command("add <file>","Adds the file to repository",
+    (yargs)=>{yargs.positional("file" ,
+        {
     describe:"file to add to stagging area",
     type:"string"
 });
 }, 
-addRepo
+(argv)=>{
+    addRepo(argv.file);
+}
 )
 
-.command('commit <message>' , "Commit the stagged" ,(yargs) =>{yargs.positional("message:" , {
-    describe:"file to commit",
+.command('commit <message>' , "Commit the stagged" ,(yargs) =>{yargs.positional("message" , {
+    describe:"commit message",
     type:"String"
 });
 
 },
-commitRepo
+(argv)=>{
+    commitRepo(argv.message);
+}
+
 )
 .command('push' , 
     "push the fill to the repository",
